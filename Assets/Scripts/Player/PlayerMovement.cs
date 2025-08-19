@@ -7,13 +7,26 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
 
     public float moveSpeed;
+    public bool isAttacking = false;
 
     private Vector2 _moveDirection;
+    private Animator _animator;
     
     public InputActionReference moveAction;
     public InputActionReference fireAction;
     
+    private void Start()
+    {
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
 
+        if (_animator == null)
+        {
+            _animator = GetComponent<Animator>();
+        }
+    }
 
     private void Update()
     {
@@ -37,6 +50,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Fire(InputAction.CallbackContext obj)
     {
-        Debug.Log("Fired");
+        _animator.SetTrigger("Attack");
     }
 }

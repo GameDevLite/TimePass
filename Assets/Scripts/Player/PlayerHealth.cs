@@ -5,11 +5,14 @@ public class PlayerHealth : MonoBehaviour
     
     public int maxHealth = 10; // Maximum health of the player
     private int _currentHealth; // Current health of the player
+    [SerializeField] private Healthbar _healthbar; // Reference to the health bar UI component
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _currentHealth = maxHealth; // Initialize current health to maximum health
+        _healthbar.UpdateHealthBar(maxHealth, _currentHealth);
         
     }
 
@@ -22,7 +25,8 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _currentHealth -= damage; // Reduce current health by damage amount
-        Debug.Log("Player took damage: " + damage + ", Current Health: " + _currentHealth); // Log the damage taken and current health
+        _healthbar.UpdateHealthBar(maxHealth, _currentHealth);
+        
         if (_currentHealth <= 0)
         {
             Die(); // Call Die method if health is zero or below
