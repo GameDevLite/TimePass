@@ -6,6 +6,10 @@ public class EnemyFollow : MonoBehaviour
     private Transform player;     // Player reference
     public float speed = 2f;      // Movement speed
     public float stopDistance = 0.5f; // How close before stopping (optional)
+    
+    public bool voidType = false; // Flag to check if the enemy is of void type
+    public bool lightType = false; // Flag to check if the enemy is of light type
+    public bool natureType = false; // Flag to check if the enemy is of nature type
 
     void Start()
     {
@@ -45,10 +49,28 @@ public class EnemyFollow : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Handle collision with player (e.g., damage player, trigger game over, etc.)
-            Debug.Log("Enemy collided with player!");
-            // Example: You could call a method on the player to apply damage
-            other.GetComponent<PlayerHealth>().TakeDamage(1);
+            // switch case based on enemy type and player prayer type
+            if (voidType && other.GetComponent<PlayerPrayer>().IsVoidActive)
+            {
+                Debug.Log("Void enemy hit the player with void prayer active.");
+                // Implement logic for void enemy hitting player with void prayer active
+            }
+            else if (lightType && other.GetComponent<PlayerPrayer>().IsLightActive)
+            {
+                Debug.Log("Light enemy hit the player with light prayer active.");
+                // Implement logic for light enemy hitting player with light prayer active
+            }
+            else if (natureType && other.GetComponent<PlayerPrayer>().IsNatureActive)
+            {
+                Debug.Log("Nature enemy hit the player with nature prayer active.");
+                // Implement logic for nature enemy hitting player with nature prayer active
+            }
+            else
+            {
+                Debug.Log("Enemy hit the player without matching prayer type.");
+                // Implement logic for enemy hitting player without matching prayer type
+                other.GetComponent<PlayerHealth>().TakeDamage(1); // Example damage logic
+            }
         }
     }
 }
