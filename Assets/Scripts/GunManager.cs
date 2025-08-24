@@ -24,9 +24,6 @@ public class GunManager : MonoBehaviour
         gunPositions.Add(new Vector2(1f, 0.5f));
         
         AddGun();
-        AddGun();
-        AddGun();
-        AddGun();
         
     }
 

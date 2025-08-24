@@ -117,8 +117,8 @@ GameObject:
   m_Component:
   - component: {fileID: 614769808622301093}
   - component: {fileID: 7630130423891630406}
-  - component: {fileID: 718693109355099406}
   - component: {fileID: 5327524887854721018}
+  - component: {fileID: 8618357861678875666}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -202,28 +202,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &718693109355099406
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2688153112608987865}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8afeeaf057709614698e2339a60f8380, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5327524887854721018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,6 +216,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 5
   _healthbar: {fileID: 3198627622471080611}
+--- !u!114 &8618357861678875666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688153112608987865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0befe11a760ca43b0f23b87a312580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossAttack
+  leftArmSpawner: {fileID: 498379105710761823}
+  rightArmSpawner: {fileID: 3344828330242148915}
+  projectilePrefab: {fileID: 1116843592321870410, guid: 3bcc5fc42e70f1f4c87763b29791f133, type: 3}
+  projectileSpeed: 10
+  attackCooldown: 2
+  canAttack: 1
 --- !u!1 &3344828330242148915
 GameObject:
   m_ObjectHideFlags: 0

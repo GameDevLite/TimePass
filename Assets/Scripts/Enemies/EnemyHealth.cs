@@ -2,29 +2,29 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int maxHealth = 5; // Maximum health of the enemy
-    private int _currentHealth; // Current health of the enemy
+    public int maxHealth = 5;
+    private int _currentHealth;
 
-    private Animator anim;
+    private Animator _anim;
     
-    [SerializeField] private Healthbar _healthbar; // Reference to the health bar UI component
+    [SerializeField] private Healthbar _healthbar;
     
     void Start()
     {
-        anim = GetComponent<Animator>();
-        _currentHealth = maxHealth; // Initialize current health to maximum health
+        _anim = GetComponent<Animator>();
+        _currentHealth = maxHealth;
         
         _healthbar.UpdateHealthBar(maxHealth, _currentHealth);
     }
     
     public void TakeDamage(int damage)
     {
-        _currentHealth -= damage; // Reduce current health by damage amount
+        _currentHealth -= damage;
         _healthbar.UpdateHealthBar(maxHealth, _currentHealth);
-        anim.SetTrigger("hit");
+        //anim.SetTrigger("hit");
         if (_currentHealth <= 0)
         {
-            Die(); // Call Die method if health is zero or below
+            Die();
         }
     }
 
