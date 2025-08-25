@@ -163,4 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77640ca3e54e9a9458fc1fe925c3c150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoolAttack
-  damageType: 1
+  poolDuration: 3
+  poolDamageType: 1
+  damageAmount: 10

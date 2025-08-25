@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BossIdle
+  m_Name: dwarfRun
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: f3aeedea663da2f4d8f7caf1e5b927a3, type: 3}
+      value: {fileID: 21300000, guid: bc15fcdffcaf87f4cb44e0c2d2192ab6, type: 3}
+    - time: 0.083333336
+      value: {fileID: 21300000, guid: a2b05f9c8a4b41c46b3bd68d25c399ce, type: 3}
+    - time: 0.16666667
+      value: {fileID: 21300000, guid: bfc52014958ef374baf0fd513614743d, type: 3}
     - time: 0.25
-      value: {fileID: 21300000, guid: 854f7471aaf285748b3ee94e7a4d1c1f, type: 3}
-    - time: 0.5
-      value: {fileID: 21300000, guid: 7e387e6c763e2494c8846c984b09c1f8, type: 3}
-    - time: 0.75
-      value: {fileID: 21300000, guid: db017885c8cad9f47a63438383ceb86f, type: 3}
+      value: {fileID: 21300000, guid: 60e88756cbbd8804dbf72b489c63531d, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,16 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: f3aeedea663da2f4d8f7caf1e5b927a3, type: 3}
-    - {fileID: 21300000, guid: 854f7471aaf285748b3ee94e7a4d1c1f, type: 3}
-    - {fileID: 21300000, guid: 7e387e6c763e2494c8846c984b09c1f8, type: 3}
-    - {fileID: 21300000, guid: db017885c8cad9f47a63438383ceb86f, type: 3}
+    - {fileID: 21300000, guid: bc15fcdffcaf87f4cb44e0c2d2192ab6, type: 3}
+    - {fileID: 21300000, guid: a2b05f9c8a4b41c46b3bd68d25c399ce, type: 3}
+    - {fileID: 21300000, guid: bfc52014958ef374baf0fd513614743d, type: 3}
+    - {fileID: 21300000, guid: 60e88756cbbd8804dbf72b489c63531d, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.76666665
+    m_StopTime: 0.26666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

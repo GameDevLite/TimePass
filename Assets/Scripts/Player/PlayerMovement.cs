@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     
     public InputActionReference moveAction;
     public InputActionReference fireAction;
+
+    [SerializeField] private GameObject playerSprite;
     
     private void Start()
     {
@@ -24,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_animator == null)
         {
-            _animator = GetComponent<Animator>();
+            _animator = playerSprite.GetComponent<Animator>();
         }
     }
 
@@ -36,6 +38,19 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(_moveDirection.x * moveSpeed, _moveDirection.y * moveSpeed);
+        if (rb.linearVelocity.magnitude > 0.1f)
+        {
+            _animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            _animator.SetBool("isRunning", false);
+        }
+        
+        if(_moveDirection.x > 0)
+            playerSprite.transform.localScale = new Vector3(1, 1, 1);
+        else if(_moveDirection.x < 0)
+            playerSprite.transform.localScale = new Vector3(-1, 1, 1);
     }
 
     private void OnEnable()

@@ -8,7 +8,8 @@ public class BossAttack : MonoBehaviour
     [SerializeField] private GameObject rightArmSpawner;
     
     [Header("Boss Projectile")]
-    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject projectilePrefabVoid;
+    [SerializeField] private GameObject projectilePrefabLight;
     [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private float pulseDelay = .2f;
     [SerializeField] private int projectileCount = 20;
@@ -20,19 +21,28 @@ public class BossAttack : MonoBehaviour
     [SerializeField] private GameObject lightPoolPositionPrefab;
     [SerializeField] private GameObject voidPoolPositionPrefab;
     [SerializeField] private float poolDuration = 1f;
-    
-    
+
+    [SerializeField] private GameObject bossSprite;
     [SerializeField] private bool canAttack = true;
     private Animator _animator;
-    private Transform _shootingPoint;
+    private Transform _leftShootingPoint;
+    private Transform _rightShootingPoint;
     private Coroutine _shootingRoutine;
     private PoolAttack _poolAttack;
+    private Transform[] _shootingPoints;
     
     private void Start()
     {
-        _animator = GetComponent<Animator>();
-        SpecialAttack();
+        _animator = bossSprite.GetComponent<Animator>();
+
+        if (leftArmSpawner != null)
+            _leftShootingPoint = leftArmSpawner.transform;
+        if (rightArmSpawner != null)
+            _rightShootingPoint = rightArmSpawner.transform;
+
+        AttackRandomizer();
     }
+
     
     public void ToggleCanAttack()
     {
@@ -44,9 +54,14 @@ public class BossAttack : MonoBehaviour
         _animator.SetTrigger("PoolAttack");
     }
 
+    private void DoubleShoot()
+    {
+        _animator.SetTrigger("DoubleLight");
+    }
+
     private void AttackRandomizer()
     {
-        var choice = Random.Range(0, 2); // 0 = Special, 1 = Left
+        var choice = Random.Range(0, 3); // 0 = Special, 1 = Left
 
         switch (choice)
         {
@@ -56,18 +71,19 @@ public class BossAttack : MonoBehaviour
             case 1:
                 LeftAttack();
                 break;
+            case 2:
+                DoubleShoot();
+                break;
         }
     }
 
 
     public void LeftAttack()
     {
-        _shootingPoint = leftArmSpawner.transform;
-        
         _animator.SetTrigger("LAttack");
     }
 
-    private IEnumerator Shoot()
+    private IEnumerator ShootFromPoints(GameObject prefab, params Transform[] points)
     {
         for (var pulse = 0; pulse < pulseCount; pulse++)
         {
@@ -75,27 +91,41 @@ public class BossAttack : MonoBehaviour
             {
                 var angle = i * (360f / projectileCount);
                 var rotation = Quaternion.Euler(0, 0, angle);
-                var projectile = Instantiate(projectilePrefab, _shootingPoint.position, rotation);
-                var rb = projectile.GetComponent<Rigidbody2D>();
-                rb.linearVelocity = rotation * Vector2.up * projectileSpeed;
-                Destroy(projectile, 3f);
+
+                foreach (var shootingPoint in points)
+                {
+                    if (shootingPoint == null) continue;
+
+                    var projectile = Instantiate(prefab, shootingPoint.position, rotation);
+                    var rb = projectile.GetComponent<Rigidbody2D>();
+                    rb.linearVelocity = rotation * Vector2.up * projectileSpeed;
+                    Destroy(projectile, 3f);
+                }
             }
             yield return new WaitForSeconds(pulseDelay);
         }
     }
+
+
     
-    public void StartShooting()
+    public void ShootLeft()
     {
-        _shootingRoutine = StartCoroutine(Shoot());
+        _shootingRoutine = StartCoroutine(ShootFromPoints(projectilePrefabVoid, _leftShootingPoint));
+    }
+    
+    public void ShootRight()
+    {
+        _shootingRoutine = StartCoroutine(ShootFromPoints(projectilePrefabVoid, _rightShootingPoint));
+    }
+    
+    public void ShootBoth()
+    {
+        _shootingRoutine = StartCoroutine(ShootFromPoints(projectilePrefabLight,_leftShootingPoint, _rightShootingPoint));
     }
 
     public void StopShooting()
     {
-        if (_shootingRoutine != null)
-        {
-            StopCoroutine(_shootingRoutine);
-            _shootingRoutine = null;
-        }
+        StopCoroutine(_shootingRoutine);
     }
     
     public void SpawnVoidPool()
@@ -107,6 +137,8 @@ public class BossAttack : MonoBehaviour
     {
         Instantiate(lightPoolPrefab, lightPoolPositionPrefab.transform.position, Quaternion.identity);
     }
+    
+    
 
 
 }

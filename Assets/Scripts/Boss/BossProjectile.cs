@@ -3,7 +3,7 @@ using UnityEngine;
 public class BossProjectile : MonoBehaviour
 {
     [SerializeField] private float speed = 18f; // Speed of the projectile
-    private DamageType _damageType = DamageType.Void;
+    [SerializeField] private DamageType _damageType = DamageType.Void;
 
     private void FixedUpdate()
     {
