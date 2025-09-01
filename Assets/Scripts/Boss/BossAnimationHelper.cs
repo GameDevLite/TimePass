@@ -33,4 +33,14 @@ public class BossAnimationHelper : MonoBehaviour
     {
         _bossAttack.StopShooting();
     }
+
+    public void TriggerVoidPool()
+    {
+        _bossAttack.SpawnVoidPool();
+    }
+    
+    public void TriggerLightPool()
+    {
+        _bossAttack.SpawnLightPool();
+    }
 }
